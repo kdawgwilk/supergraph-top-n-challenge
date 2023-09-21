@@ -1,0 +1,32 @@
+sources:
+  - name: Threads
+    handler:
+      graphql:
+        endpoint: http://host.docker.internal:4001/graphql
+  - name: Posts
+    handler:
+      graphql:
+        endpoint: http://host.docker.internal:4002/graphql
+serve:
+  playground: true
+
+additionalTypeDefs: |
+  extend type Thread {
+    posts(limit: Int): [Post!]! @resolveTo(
+      sourceName: "Posts",
+      sourceTypeName: "Query",
+      sourceFieldName: "postsByThreadId",
+      requiredSelectionSet: "{ id }",
+      sourceArgs: {
+        id: "{root.id}"
+        limit: "{args.limit}"
+      }
+    )
+    postsBulk(limit: Int): [Post!]! @resolveTo(
+      sourceName: "Posts",
+      sourceTypeName: "Query",
+      sourceFieldName: "postsByThreadIds",
+      keyField: "id",
+      keysArg: "ids",
+    )
+  }

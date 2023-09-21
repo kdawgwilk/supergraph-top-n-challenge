@@ -1,0 +1,21 @@
+{
+  "name": "gateway",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "mesh dev",
+    "start:prod": "sleep 10 && mesh build && mesh start",
+    "build": "mesh build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@graphql-mesh/cli": "^0.87.8",
+    "@graphql-mesh/graphql": "^0.95.4",
+    "@graphql-mesh/openapi": "^0.95.5",
+    "@graphql-mesh/runtime": "^0.96.5",
+    "graphql": "^16.8.1"
+  }
+}
